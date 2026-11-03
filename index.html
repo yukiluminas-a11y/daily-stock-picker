@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Stock AI Advisor | 日本株・外国株 売買予測</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151c2c;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .stock-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .market-badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #1e293b;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+        .symbol {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .name {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+        .action-badge {
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: #fff;
+        }
+        .stock-info {
+            display: flex;
+            gap: 25px;
+            margin: 15px 0 10px 0;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+        .stock-info strong {
+            color: var(--text-main);
+        }
+        .reasons-list {
+            background-color: #0b0f19;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-top: 10px;
+            font-size: 0.88rem;
+        }
+        .reasons-list ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+            color: #cbd5e1;
+        }
+        .reasons-list li {
+            margin-bottom: 4px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 Global AI Stock Trading Advisor</h1>
+            <div class="subtitle">日本株・米国株・欧州ADR リアルタイム分析 & 売買予測シグナル | 更新日時 (JST): 2026-11-03 23:04</div>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">MSFT</span>
+                    <span class="name">Microsoft</span>
+                </div>
+                <div class="action-badge" style="background-color: #22c55e;">
+                    🔥 強気買い（今すぐ注目）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$507.12</strong></div>
+                <div>RSI (14日): <strong>27.8</strong></div>
+                <div>総合スコア: <strong>70 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(27.8) が強い売られすぎ領域。売りのクライマックス（押し目買場）</li><li>ボリンジャーバンド-2σ到達。売られすぎからの自律反発期待</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">6861.T</span>
+                    <span class="name">キーエンス</span>
+                </div>
+                <div class="action-badge" style="background-color: #22c55e;">
+                    🔥 強気買い（今すぐ注目）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥74,890</strong></div>
+                <div>RSI (14日): <strong>36.4</strong></div>
+                <div>総合スコア: <strong>50 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(36.4) 割安ゾーン。エントリー好機</li><li>ボリンジャーバンド-2σ到達。売られすぎからの自律反発期待</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">AAPL</span>
+                    <span class="name">Apple</span>
+                </div>
+                <div class="action-badge" style="background-color: #10b981;">
+                    🟢 買い（押し目狙い）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$338.32</strong></div>
+                <div>RSI (14日): <strong>46.6</strong></div>
+                <div>総合スコア: <strong>40 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期強気相場（200日移動平均線の上で推移）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">TSLA</span>
+                    <span class="name">Tesla</span>
+                </div>
+                <div class="action-badge" style="background-color: #10b981;">
+                    🟢 買い（押し目狙い）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$403.82</strong></div>
+                <div>RSI (14日): <strong>62.6</strong></div>
+                <div>総合スコア: <strong>40 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期強気相場（200日移動平均線の上で推移）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">6758.T</span>
+                    <span class="name">ソニーグループ</span>
+                </div>
+                <div class="action-badge" style="background-color: #10b981;">
+                    🟢 買い（押し目狙い）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥3,966</strong></div>
+                <div>RSI (14日): <strong>63.7</strong></div>
+                <div>総合スコア: <strong>40 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期強気相場（200日移動平均線の上で推移）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">AMZN</span>
+                    <span class="name">Amazon</span>
+                </div>
+                <div class="action-badge" style="background-color: #10b981;">
+                    🟢 買い（押し目狙い）
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$245.63</strong></div>
+                <div>RSI (14日): <strong>39.8</strong></div>
+                <div>総合スコア: <strong>30 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(39.8) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">GOOGL</span>
+                    <span class="name">Alphabet (Google)</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$278.99</strong></div>
+                <div>RSI (14日): <strong>13.1</strong></div>
+                <div>総合スコア: <strong>15 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(13.1) が強い売られすぎ領域。売りのクライマックス（押し目買場）</li><li>ボリンジャーバンド-2σ到達。売られすぎからの自律反発期待</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">LLY</span>
+                    <span class="name">Eli Lilly (製薬)</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$1,410.99</strong></div>
+                <div>RSI (14日): <strong>81.9</strong></div>
+                <div>総合スコア: <strong>10 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(81.9) が買われすぎ過熱ゾーン。利益確定売りを推奨</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">8306.T</span>
+                    <span class="name">三菱UFJ FG</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥3,383</strong></div>
+                <div>RSI (14日): <strong>39.4</strong></div>
+                <div>総合スコア: <strong>5 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(39.4) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">NVDA</span>
+                    <span class="name">NVIDIA</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$202.06</strong></div>
+                <div>RSI (14日): <strong>26.9</strong></div>
+                <div>総合スコア: <strong>-5 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(26.9) が強い売られすぎ領域。売りのクライマックス（押し目買場）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">JPM</span>
+                    <span class="name">JPMorgan Chase (金融)</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$340.58</strong></div>
+                <div>RSI (14日): <strong>60.2</strong></div>
+                <div>総合スコア: <strong>-10 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期強気相場（200日移動平均線の上で推移）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">WMT</span>
+                    <span class="name">Walmart (消費財)</span>
+                </div>
+                <div class="action-badge" style="background-color: #94a3b8;">
+                    ⚪️ 中立 / 静観・様子見
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$127.69</strong></div>
+                <div>RSI (14日): <strong>83.6</strong></div>
+                <div>総合スコア: <strong>-10 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期強気相場（200日移動平均線の上で推移）</li><li>RSI(83.6) が買われすぎ過熱ゾーン。利益確定売りを推奨</li><li>ボリンジャーバンド+2σ到達。短期的な天井感・調整警戒</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">7203.T</span>
+                    <span class="name">トヨタ自動車</span>
+                </div>
+                <div class="action-badge" style="background-color: #f97316;">
+                    🟠 売り推奨 / 利益確定
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥3,051</strong></div>
+                <div>RSI (14日): <strong>61.7</strong></div>
+                <div>総合スコア: <strong>-15 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>中期上昇トレンド維持（株価 > 50日線 & 20日線 > 50日線）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>MACDがデッドクロス（売り転換サイン初動）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">9984.T</span>
+                    <span class="name">ソフトバンクグループ</span>
+                </div>
+                <div class="action-badge" style="background-color: #f97316;">
+                    🟠 売り推奨 / 利益確定
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥4,410</strong></div>
+                <div>RSI (14日): <strong>30.5</strong></div>
+                <div>総合スコア: <strong>-25 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(30.5) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">日本</span>
+                    <span class="symbol">8035.T</span>
+                    <span class="name">東京エレクトロン</span>
+                </div>
+                <div class="action-badge" style="background-color: #f97316;">
+                    🟠 売り推奨 / 利益確定
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>￥10,005</strong></div>
+                <div>RSI (14日): <strong>34.7</strong></div>
+                <div>総合スコア: <strong>-25 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(34.7) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">欧州(ADR)</span>
+                    <span class="symbol">ASML</span>
+                    <span class="name">ASML Holding (半導体露光/オランダ)</span>
+                </div>
+                <div class="action-badge" style="background-color: #f97316;">
+                    🟠 売り推奨 / 利益確定
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$1,526.14</strong></div>
+                <div>RSI (14日): <strong>32.5</strong></div>
+                <div>総合スコア: <strong>-25 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(32.5) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">アジア(ADR)</span>
+                    <span class="symbol">TSM</span>
+                    <span class="name">TSMC (半導体ファウンドリ/台湾)</span>
+                </div>
+                <div class="action-badge" style="background-color: #f97316;">
+                    🟠 売り推奨 / 利益確定
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$398.63</strong></div>
+                <div>RSI (14日): <strong>33.3</strong></div>
+                <div>総合スコア: <strong>-25 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(33.3) 割安ゾーン。エントリー好機</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">米国</span>
+                    <span class="symbol">AVGO</span>
+                    <span class="name">Broadcom</span>
+                </div>
+                <div class="action-badge" style="background-color: #ef4444;">
+                    🚨 強烈な売り / 手仕舞い
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$322.23</strong></div>
+                <div>RSI (14日): <strong>34.6</strong></div>
+                <div>総合スコア: <strong>-50 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(34.6) 割安ゾーン。エントリー好機</li><li>MACDがデッドクロス（売り転換サイン初動）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="stock-title">
+                    <span class="market-badge">欧州(ADR)</span>
+                    <span class="symbol">NVO</span>
+                    <span class="name">Novo Nordisk (製薬/デンマーク)</span>
+                </div>
+                <div class="action-badge" style="background-color: #ef4444;">
+                    🚨 強烈な売り / 手仕舞い
+                </div>
+            </div>
+            <div class="stock-info">
+                <div>株価: <strong>$40.45</strong></div>
+                <div>RSI (14日): <strong>67.0</strong></div>
+                <div>総合スコア: <strong>-70 pts</strong></div>
+            </div>
+            <div class="reasons-list">
+                📊 <strong>売買判断の根拠とテクニカル分析:</strong>
+                <ul>
+                    <li>下降トレンド継続中（50日線を下回る強気リスクあり）</li><li>長期弱気相場（200日移動平均線を下回る）</li><li>RSI(67.0) やや買われすぎ傾向</li><li>ボリンジャーバンド+2σ到達。短期的な天井感・調整警戒</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            ⚠️ 【免責事項】当Webページが提示する売買判断・分析結果は、アルゴリズムによる自動計算に基づく情報提供のみを目的としており、特定の銘柄の売買を勧誘・保証するものではありません。実際の投資判断はご自身の責任で行ってください。
+        </footer>
+    </div>
+</body>
+</html>
